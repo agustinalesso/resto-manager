@@ -25,9 +25,6 @@ export class InicioComponent {
       this.idMesa = params['idMesa'];
       this.idResto = params['idResto'];
     })
-
-    this.restoService._functionTest();
-
   }
 
 }
