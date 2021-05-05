@@ -9,8 +9,8 @@ import { AdminInicioComponent } from './components/admin/admin-inicio/admin-inic
 const routes: Routes = [
   { path: 'admin-start', component: AdminInicioComponent, canActivate: [AuthGuard] },
   { path: 'admin-login'   , component: LoginComponent },
-  { path: 'inicio'   , component: InicioComponent },
-  { path: '**', redirectTo: 'inicio' }
+  { path: 'inicio/:idResto/:idMesa'   , component: InicioComponent },
+  { path: '**', redirectTo: 'inicio/:idResto/:idMesa' }
 ];
 
 @NgModule({

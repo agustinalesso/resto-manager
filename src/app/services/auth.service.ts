@@ -18,24 +18,6 @@ export class AuthService {
     this.getToken();
   }
 
-  nuevoUsuario( usuario : UsuarioModel){
-    const authData = {
-      ...usuario,
-      returnSecureToken: true
-    }
-
-    return this.http.post(
-      `${this.URL_API}signUp?key=${this.API_KEY}`,
-      authData
-    ).pipe(
-      map( (resp : any) => {
-        this.saveToken(resp['idToken']);
-        return resp;
-      })
-    );
-
-  }
-
   login(usuario: UsuarioModel){
     const authData = {
       ...usuario,
