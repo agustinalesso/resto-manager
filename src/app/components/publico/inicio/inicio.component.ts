@@ -9,23 +9,25 @@ import { RestoService } from 'src/app/services/resto.service';
 })
 export class InicioComponent {
 
-  private _idMesa! : number;
-  private _idResto!: number;
+  idMesa! : number;
+  idResto!: number;
 
   mensajeBienvenida : string = ``;
 
   constructor(private activatedRoute : ActivatedRoute, private restoService : RestoService) { }
 
   cargarBienvenida(idMesa:number,idResto:number){
-
+    
   }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( params => {
-      this._idMesa = params['idMesa'];
-      this._idResto = params['idResto'];
-      this.cargarBienvenida(this._idMesa,this._idResto);
+      this.idMesa = params['idMesa'];
+      this.idResto = params['idResto'];
     })
+
+    this.restoService._functionTest();
+
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+
 import { UsuarioModel } from 'src/app/models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -34,7 +35,6 @@ export class LoginComponent implements OnInit {
     Swal.showLoading();
 
     this.auth.login(this.usuario).subscribe((data) => {
-      console.log(data);
       Swal.close();
 
       if(this.recuerdame == true){
