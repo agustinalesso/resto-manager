@@ -6,26 +6,38 @@ import db from '../models/database.model';
 })
 export class RestoService {
 
-  database = db;
-
-  usuarioEjemplo = {
-    nombre: 'Matias',
-    apellido: 'Sabino',
-    edad: 34,
-    email: 'agustinalesso23@gmail.com'
-  }
+  private restaurantes = db.collection('restos');
+  private id : string = '';
+  idMenu : string = '';
 
   constructor() { }
 
-/*   _functionTest(){
-    this.database
-      .collection('pepito')
-      .add(this.usuarioEjemplo)
-      .then(res => {
-        console.log(res);
-      }).catch(e => {
-        console.log('error', e);
-      })
-  } */
+  obtenerRestaurant(restoId?:string){
+      return this.restaurantes.doc(restoId)
+  }
+  obtenerRestaurantes(){
+    return this.restaurantes.get()
+  }
 
+  obtenerRestoPorEmail(email:string){
+    let datos : any;
+    let identificador : string;
+    this.restaurantes.get().then(d => {
+      d.forEach(dh => {
+        datos = dh.data()
+        if(datos['email'] == email){
+          identificador = dh.id
+        }
+      })
+      return identificador;
+    })
+  }
+
+  obtenerMesas(restoId?:string){
+    return this.restaurantes.doc(restoId).collection('mesas')
+  }
+
+  obtenerMenuResto(idResto:string){
+    return this.restaurantes.doc(idResto).collection('menu')
+  }
 }

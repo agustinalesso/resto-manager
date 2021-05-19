@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminInicioComponent } from './components/admin/admin-inicio/admin-inicio.component';
 import { InicioComponent } from './components/publico/inicio/inicio.component';
+import { ScannerComponent } from './components/publico/scanner/scanner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     AdminInicioComponent,
-    InicioComponent
+    InicioComponent,
+    ScannerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RestoService } from 'src/app/services/resto.service';
 
 @Component({
   selector: 'app-admin-inicio',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminInicioComponent implements OnInit {
 
-  constructor() { }
+  constructor(private restoService : RestoService) { }
 
   ngOnInit(): void {
+
   }
 
 }
