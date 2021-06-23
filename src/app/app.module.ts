@@ -11,6 +11,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AdminInicioComponent } from './components/admin/admin-inicio/admin-inicio.component';
 import { InicioComponent } from './components/publico/inicio/inicio.component';
 import { ScannerComponent } from './components/publico/scanner/scanner.component';
+import { VerMesasComponent } from './components/admin/admin-inicio/mesas/ver-mesas/ver-mesas.component';
+import { NuevaMesaComponent } from './components/admin/admin-inicio/mesas/nueva-mesa/nueva-mesa.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ScannerComponent } from './components/publico/scanner/scanner.component
     LoginComponent,
     AdminInicioComponent,
     InicioComponent,
-    ScannerComponent
+    ScannerComponent,
+    VerMesasComponent,
+    NuevaMesaComponent
   ],
   imports: [
     BrowserModule,

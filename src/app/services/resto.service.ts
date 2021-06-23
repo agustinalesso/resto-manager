@@ -1,43 +1,19 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import db from '../models/database.model';
+import { RestoData } from '../models/restaurant.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestoService {
 
-  private restaurantes = db.collection('restos');
-  private id : string = '';
-  idMenu : string = '';
+  DB_URL  = 'https://isp20-828cd-default-rtdb.firebaseio.com/resto/';
+  DB_NODE = localStorage.getItem('uid_hash');
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  obtenerRestaurant(restoId?:string){
-      return this.restaurantes.doc(restoId)
-  }
-  obtenerRestaurantes(){
-    return this.restaurantes.get()
+  obtenerRestaurant(){
+      return this.http.get<RestoData>(`${this.DB_URL}${this.DB_NODE}.json`)
   }
 
-  obtenerRestoPorEmail(email:string){
-    let datos : any;
-    let identificador : string;
-    this.restaurantes.get().then(d => {
-      d.forEach(dh => {
-        datos = dh.data()
-        if(datos['email'] == email){
-          identificador = dh.id
-        }
-      })
-      return identificador;
-    })
-  }
-
-  obtenerMesas(restoId?:string){
-    return this.restaurantes.doc(restoId).collection('mesas')
-  }
-
-  obtenerMenuResto(idResto:string){
-    return this.restaurantes.doc(idResto).collection('menu')
-  }
 }

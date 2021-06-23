@@ -37,6 +37,8 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.usuario).subscribe((data) => {
       Swal.close();
 
+      localStorage.setItem('uid_hash',data.localId);
+
       if(this.recuerdame == true){
         localStorage.setItem('email',this.usuario.email)
       }else{
@@ -45,7 +47,7 @@ export class LoginComponent implements OnInit {
         }
       }
 
-      this.router.navigateByUrl('/admin-start');
+      this.router.navigateByUrl('/admin-inicio');
     }, err => {
       Swal.close();
       switch (err.error.error.message) {
