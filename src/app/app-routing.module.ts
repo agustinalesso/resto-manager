@@ -6,14 +6,14 @@ import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/publico/inicio/inicio.component';
 import { AdminInicioComponent } from './components/admin/admin-inicio/admin-inicio.component'
 import { ScannerComponent } from './components/publico/scanner/scanner.component'
-import { MESAS_ROUTES } from './components/admin/admin-inicio/mesas/mesas.routes';
+import { ADMIN_ROUTES } from './components/admin/admin-inicio/admin.routes';
 
 const routes: Routes = [
   { 
     path: 'admin-inicio', 
     component: AdminInicioComponent, 
     canActivate: [AuthGuard],
-    children: MESAS_ROUTES
+    children: ADMIN_ROUTES
   },
   { 
     path: 'admin-iniciarsesion',
