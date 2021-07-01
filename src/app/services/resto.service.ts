@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { RestoData } from '../models/restaurant.model';
 
 @Injectable({
@@ -7,8 +8,8 @@ import { RestoData } from '../models/restaurant.model';
 })
 export class RestoService {
 
-  DB_URL  = 'https://isp20-828cd-default-rtdb.firebaseio.com/resto/';
-  DB_NODE = localStorage.getItem('uid_hash');
+  DB_URL  = environment.DB_URL;
+  DB_NODE = environment.DB_NODE;
 
   constructor(private http: HttpClient) { }
 

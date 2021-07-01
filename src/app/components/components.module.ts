@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { FormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
+
 import { AdminInicioComponent } from './admin/admin-inicio/admin-inicio.component';
 import { InicioComponent } from './admin/admin-inicio/inicio/inicio.component';
 import { VerMenuComponent } from './admin/admin-inicio/menu/ver-menu/ver-menu.component';
@@ -28,7 +31,9 @@ import { AppRoutingModule } from '../app-routing.module';
   ],
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ]
 })
 export class ComponentsModule { }

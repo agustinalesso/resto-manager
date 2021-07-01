@@ -1,2 +1,27 @@
 <h1 class="titulo-header">Mesas | <span class="badge bg-dark" *ngIf="datos_restaurante">{{datos_restaurante.nombre}}</span></h1>
 <hr class="barra-header">
+<div class="container-fluid">
+    <div class="d-flex flex-row-reverse">
+        <div class="p-0 mt-2 mb-3">
+            <button class="btn btn-primary" (click)="crearNuevaMesa()">Crear nueva mesa</button>
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Nombre de mesa</th>
+                <th>Estado de la mesa</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr>
+              <td>1</td>
+              <td>Mesa de entrada</td>
+              <td>Activa</td>
+              <td></td>
+          </tr>
+        </tbody>
+      </table>
+</div>

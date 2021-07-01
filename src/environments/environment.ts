@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  DB_URL : 'https://isp20-828cd-default-rtdb.firebaseio.com/resto/',
+  DB_NODE : localStorage.getItem('uid_hash')
 };
 
 /*
