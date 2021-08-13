@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { InicioComponent } from './components/publico/inicio/inicio.component';
 import { ScannerComponent } from './components/publico/scanner/scanner.component';
+
 import { ComponentsModule } from './components/components.module';
 
 @NgModule({

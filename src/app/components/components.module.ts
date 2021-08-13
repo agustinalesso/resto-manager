@@ -15,8 +15,6 @@ import { ConfiguracionComponent } from './admin/admin-inicio/configuracion/confi
 import { CerrarSesionComponent } from './admin/admin-inicio/cerrar-sesion/cerrar-sesion.component';
 import { AppRoutingModule } from '../app-routing.module';
 
-
-
 @NgModule({
   declarations: [
     AdminInicioComponent,

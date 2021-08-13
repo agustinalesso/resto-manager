@@ -15,8 +15,12 @@ export class MesasService {
 
   constructor(private http: HttpClient) { }
 
+  obtenerMesas(){
+    
+  }
+
   crearMesa(mesa : MesaModel){
-    return this.http.post(`${this.DB_URL}${this.DB_NODE}/mesas.json`,mesa)
+    return this.http.post(`${this.DB_URL}${this.DB_NODE}/mesas.json`, mesa)
       .pipe(
         map((resp:any) => {
           mesa.id = resp.name;
@@ -26,10 +30,12 @@ export class MesasService {
   }
 
   actualizarMesa( mesa : MesaModel) {
+    
     const mesaTemp = {
       ...mesa
     }
     delete mesaTemp.id;
+
     return this.http.put(`${this.DB_URL}${this.DB_NODE}/mesas/${mesa.id}.json`,mesaTemp)
   }
 
