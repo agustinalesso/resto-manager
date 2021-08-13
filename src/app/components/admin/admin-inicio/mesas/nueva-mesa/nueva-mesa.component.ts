@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MesaModel } from 'src/app/models/mesa.model';
 import { RestoData } from 'src/app/models/restaurant.model';
 import { MesasService } from 'src/app/services/mesas.service';
@@ -16,11 +16,11 @@ export class NuevaMesaComponent implements OnInit {
   datos_restaurante : RestoData = new RestoData();
 
   mensaje : string = '';
-  mesaId : string | null = '';
+  mesaId : any | null = '';
 
   mesa : MesaModel = new MesaModel();
 
-  constructor(private restoService : RestoService, private rl : ActivatedRoute, private mesasService : MesasService) {}
+  constructor(private restoService : RestoService, private rl : ActivatedRoute, private mesasService : MesasService, private route: Router) {}
   
   ngOnInit(): void {
     this.restoService.obtenerRestaurant().subscribe(resp => {
@@ -31,6 +31,13 @@ export class NuevaMesaComponent implements OnInit {
 
     this.mensaje = (this.mesaId === 'nueva') ? 'Nueva mesa' : 'Editar mesa';
     
+    if(this.mesaId !== 'nueva'){
+      this.mesasService.obtenerMesaIndividual(this.mesaId).subscribe(resp => {
+        this.mesa = resp;
+        this.mesa.id = this.mesaId
+      })
+    }
+
   }
 
   enviarFormulario(f : NgForm){
@@ -38,10 +45,12 @@ export class NuevaMesaComponent implements OnInit {
     if(f.invalid){ return; }
 
     if(this.mesa.id){
-      //ACTUALIZAR
+      this.mesasService.actualizarMesa(this.mesa).subscribe(resp => {
+        this.route.navigate(['admin-inicio/ver-mesas'])
+      })
     }else{
       this.mesasService.crearMesa(this.mesa).subscribe(resp => {
-        console.log(resp);
+        this.route.navigate(['admin-inicio/ver-mesas'])
       })    
     }
 

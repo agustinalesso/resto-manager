@@ -16,7 +16,12 @@ export class MesasService {
   constructor(private http: HttpClient) { }
 
   obtenerMesas(){
-    
+    return this.http.get<MesaModel[]>(`${this.DB_URL}${this.DB_NODE}/mesas.json`)
+      .pipe(map(this.arreglarObjeto))
+  }
+
+  obtenerMesaIndividual(id:any){
+    return this.http.get<MesaModel>(`${this.DB_URL}${this.DB_NODE}/mesas/${id}.json`)
   }
 
   crearMesa(mesa : MesaModel){
@@ -27,6 +32,20 @@ export class MesasService {
           return mesa; //Retorno la mesa
         })
       )
+  }
+
+  arreglarObjeto(objetoMesas: any){
+    if(!objetoMesas === null){return [];}
+    //////////////
+    const mesas : MesaModel[] = [];
+
+    Object.keys(objetoMesas).forEach( key => {
+      const mesa: MesaModel = objetoMesas[key];
+      mesa.id = key;
+      mesas.push(mesa);
+    })
+
+    return mesas;
   }
 
   actualizarMesa( mesa : MesaModel) {

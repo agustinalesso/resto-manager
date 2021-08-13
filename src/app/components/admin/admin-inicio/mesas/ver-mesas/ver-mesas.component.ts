@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MesaModel } from 'src/app/models/mesa.model';
 import { RestoData } from 'src/app/models/restaurant.model';
+import { MesasService } from 'src/app/services/mesas.service';
 import { RestoService } from 'src/app/services/resto.service';
 
 @Component({
@@ -13,13 +14,18 @@ export class VerMesasComponent implements OnInit {
 
   uid_hash: string | null = null;
   datos_restaurante : RestoData = new RestoData();
-
-  constructor(private restoService : RestoService, private rl : Router) { }
+  datos_mesas! : MesaModel[];
+  
+  constructor(private restoService : RestoService, private rl : Router, private ms: MesasService) { }
 
   ngOnInit(): void {
     
     this.restoService.obtenerRestaurant().subscribe(resp => {
       this.datos_restaurante = resp;
+    })
+
+    this.ms.obtenerMesas().subscribe(resp => {
+      this.datos_mesas = resp;                
     })
 
   }
@@ -29,8 +35,7 @@ export class VerMesasComponent implements OnInit {
   }
 
   editarMesa(mesa: MesaModel){
-    console.log(mesa);
-    
+    this.rl.navigate(['admin-inicio/mesa',mesa.id]);
   }
 
 }
