@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MesaModel } from 'src/app/models/mesa.model';
+import { MesaModel } from 'src/app/interfaces/mesa.model';
 import { RestoData } from 'src/app/models/restaurant.model';
 import { MesasService } from 'src/app/services/mesas.service';
 import { RestoService } from 'src/app/services/resto.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ver-mesas',
@@ -25,7 +26,7 @@ export class VerMesasComponent implements OnInit {
     })
 
     this.ms.obtenerMesas().subscribe(resp => {
-      this.datos_mesas = resp;                
+      this.datos_mesas = resp;
     })
 
   }
@@ -36,6 +37,26 @@ export class VerMesasComponent implements OnInit {
 
   editarMesa(mesa: MesaModel){
     this.rl.navigate(['admin-inicio/mesa',mesa.id]);
+  }
+
+  eliminarMesa(mesa:MesaModel){
+    Swal.fire({
+      title: '¿Está seguro que desea borrar esta mesa?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: `Borrar`,
+      denyButtonText: `NO borrar`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.ms.eliminarMesa(mesa).subscribe(resp => {})
+        const index = this.datos_mesas.indexOf(mesa)
+        this.datos_mesas.splice(index,1);
+        Swal.close();
+      } else if (result.isDenied) {
+        Swal.close();
+      }
+    })
   }
 
 }

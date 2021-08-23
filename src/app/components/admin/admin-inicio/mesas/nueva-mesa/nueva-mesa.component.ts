@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MesaModel } from 'src/app/models/mesa.model';
+import { MesaModel } from 'src/app/interfaces/mesa.model';
 import { RestoData } from 'src/app/models/restaurant.model';
 import { MesasService } from 'src/app/services/mesas.service';
 import { RestoService } from 'src/app/services/resto.service';
@@ -18,7 +18,11 @@ export class NuevaMesaComponent implements OnInit {
   mensaje : string = '';
   mesaId : any | null = '';
 
-  mesa : MesaModel = new MesaModel();
+  mesa : MesaModel = {
+    numero: 0,
+    activa: true,
+    nombre: ''
+  };
 
   constructor(private restoService : RestoService, private rl : ActivatedRoute, private mesasService : MesasService, private route: Router) {}
   

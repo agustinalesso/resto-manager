@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MesaModel } from '../models/mesa.model';
+import { MesaModel } from '../interfaces/mesa.model';
 
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
@@ -35,7 +35,7 @@ export class MesasService {
   }
 
   arreglarObjeto(objetoMesas: any){
-    if(!objetoMesas === null){return [];}
+    if(objetoMesas === null){return [];}
     //////////////
     const mesas : MesaModel[] = [];
 
@@ -50,12 +50,16 @@ export class MesasService {
 
   actualizarMesa( mesa : MesaModel) {
     
-    const mesaTemp = {
+    const mesaTemp : MesaModel = {
       ...mesa
     }
     delete mesaTemp.id;
 
     return this.http.put(`${this.DB_URL}${this.DB_NODE}/mesas/${mesa.id}.json`,mesaTemp)
+  }
+
+  eliminarMesa(mesa:MesaModel){
+    return this.http.delete<MesaModel>(`${this.DB_URL}${this.DB_NODE}/mesas/${mesa.id}.json`)
   }
 
 }
