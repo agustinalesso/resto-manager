@@ -10,9 +10,12 @@ import { NuevaMesaComponent } from './mesas/nueva-mesa/nueva-mesa.component';
 import { VerMesasComponent } from './mesas/ver-mesas/ver-mesas.component';
 import { VerMovimientosComponent } from './movimientos/ver-movimientos/ver-movimientos.component';
 import { VerPedidosComponent } from './pedidos/ver-pedidos/ver-pedidos.component';
-
+import { NuevaCategoriasComponent } from './categorias/nueva-categorias/nueva-categorias.component';
+import { VerCategoriasComponent } from './categorias/ver-categorias/ver-categorias.component';
 
 export const ADMIN_ROUTES: Routes = [
+    {path: 'ver-categorias', component: VerCategoriasComponent},
+    {path: 'categoria/:id', component: NuevaCategoriasComponent},
     {path: 'ver-mesas', component: VerMesasComponent},
     {path: 'mesa/:id', component: NuevaMesaComponent},
     {path: 'ver-menu', component: VerMenuComponent},

@@ -14,6 +14,8 @@ import { VerPedidosComponent } from './admin/admin-inicio/pedidos/ver-pedidos/ve
 import { ConfiguracionComponent } from './admin/admin-inicio/configuracion/configuracion.component';
 import { CerrarSesionComponent } from './admin/admin-inicio/cerrar-sesion/cerrar-sesion.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { VerCategoriasComponent } from './admin/admin-inicio/categorias/ver-categorias/ver-categorias.component';
+import { NuevaCategoriasComponent } from './admin/admin-inicio/categorias/nueva-categorias/nueva-categorias.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { AppRoutingModule } from '../app-routing.module';
     VerMovimientosComponent,
     VerPedidosComponent,
     ConfiguracionComponent,
-    CerrarSesionComponent
+    CerrarSesionComponent,
+    VerCategoriasComponent,
+    NuevaCategoriasComponent
   ],
   imports: [
     CommonModule,

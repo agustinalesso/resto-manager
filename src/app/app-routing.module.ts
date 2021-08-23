@@ -17,10 +17,10 @@ const routes: Routes = [
   },
   { 
     path: 'admin-iniciarsesion',
-     component: LoginComponent },
+    component: LoginComponent },
   { 
     path: 'inicio/:idResto/:idMesa',
-     component: InicioComponent 
+    component: InicioComponent 
   },
   { 
     path: 'public/scanner' ,
