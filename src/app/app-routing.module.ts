@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AuthGuard } from '../app/guards/auth.guard'
 import { LoginComponent } from './components/login/login.component';
-import { InicioComponent } from './components/publico/inicio/inicio.component';
 import { AdminInicioComponent } from './components/admin/admin-inicio/admin-inicio.component'
 import { ScannerComponent } from './components/publico/scanner/scanner.component'
 import { ADMIN_ROUTES } from './components/admin/admin-inicio/admin.routes';
+import { InicioRoutingModule } from './components/publico/inicio/inicio.routes';
 
 const routes: Routes = [
   { 
@@ -19,10 +19,6 @@ const routes: Routes = [
     path: 'admin-iniciarsesion',
     component: LoginComponent },
   { 
-    path: 'inicio/:idResto/:idMesa',
-    component: InicioComponent 
-  },
-  { 
     path: 'public/scanner' ,
     component : ScannerComponent
   },
@@ -33,7 +29,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [
+    RouterModule.forRoot(routes, {useHash: true}),
+    InicioRoutingModule
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -61,7 +61,6 @@ export class NuevaCategoriasComponent implements OnInit {
           yaExiste = true;
           break;
         }
-      
       }
       if(this.categoria.id){
         this._cs.actualizarCategoria(this.categoria).subscribe(resp => {

@@ -54,7 +54,8 @@ export class NuevaMesaComponent implements OnInit {
       })
     }else{
       this.mesasService.crearMesa(this.mesa).subscribe(resp => {
-        this.route.navigate(['admin-inicio/ver-mesas'])
+        console.log(resp);
+        //this.route.navigate(['admin-inicio/ver-mesas'])
       })    
     }
 

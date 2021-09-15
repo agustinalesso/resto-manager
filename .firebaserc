@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "isp20-828cd": {
+      "hosting": {
+        "resto-manager": [
+          "isp20-828cd"
+        ]
+      }
+    }
+  }
+}

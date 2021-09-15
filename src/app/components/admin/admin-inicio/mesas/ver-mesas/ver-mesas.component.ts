@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class VerMesasComponent implements OnInit {
 
-  uid_hash: string | null = null;
+  cargando = true;
   datos_restaurante : RestoData = new RestoData();
   datos_mesas! : MesaModel[];
   
@@ -27,6 +27,7 @@ export class VerMesasComponent implements OnInit {
 
     this.ms.obtenerMesas().subscribe(resp => {
       this.datos_mesas = resp;
+      this.cargando = false;
     })
 
   }

@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class VerCategoriasComponent implements OnInit {
 
+  cargando = true;
   datos_restaurante : RestoData = new RestoData();
   categorias : CategoriaModel[] = [];
   
@@ -27,6 +28,7 @@ export class VerCategoriasComponent implements OnInit {
 
     this.categService.obtenerCategorias().subscribe(resp => {
       this.categorias = resp;
+      this.cargando = false;
     })
   }
 

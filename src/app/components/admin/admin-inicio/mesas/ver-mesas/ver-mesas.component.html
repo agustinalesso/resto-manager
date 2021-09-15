@@ -1,6 +1,11 @@
 <h1 class="titulo-header">Mesas | <span class="badge bg-dark" *ngIf="datos_restaurante">{{datos_restaurante.nombre}}</span></h1>
 <hr class="barra-header">
-<div class="container-fluid">
+<div class="d-flex justify-content-center" *ngIf="cargando">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Cargando...</span>
+    </div>
+</div>
+<div class="container-fluid" *ngIf="!cargando">
     <div class="d-flex flex-row-reverse">
         <div class="p-0 mt-2 mb-3">
             <button class="btn btn-primary" (click)="crearNuevaMesa()">+ Mesa</button>
@@ -22,7 +27,8 @@
                 <th>Nombre de mesa</th>
                 <th>Número</th>
                 <th>Estado de la mesa</th>
-                <th>Acciones</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -34,9 +40,11 @@
                     <span *ngIf="mesa.activa" class="badge bg-success text-white">Activa</span>
                     <span *ngIf="!mesa.activa" class="badge bg-danger text-white">Inactiva</span>
                 </td>
-                <td>
-                    <button (click)="editarMesa(mesa)" type="button" class="btn btn-primary"><i class="far fa-edit"></i></button>
-                    <button (click)="eliminarMesa(mesa)" type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+                <td style="width:140px;">
+                    <button (click)="editarMesa(mesa)" type="button" class="btn btn-primary"><i class="far fa-edit"></i> Editar</button>
+                </td>
+                <td style="width:140px;">
+                    <button (click)="eliminarMesa(mesa)" type="button" class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
                 </td>
             </tr>
         </tbody>

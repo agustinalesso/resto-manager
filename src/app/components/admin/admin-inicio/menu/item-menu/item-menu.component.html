@@ -1,1 +1,89 @@
-<p>item-menu works!</p>
+<h1 class="titulo-header">{{mensaje}} | <span class="badge bg-dark"
+        *ngIf="datos_restaurante">{{datos_restaurante.nombre}}</span></h1>
+<hr class="barra-header">
+<div class="container-fluid">
+    <div class="d-flex flex-row-reverse">
+        <div class="p-0 mt-2 mb-3">
+            <button class="btn btn-outline-danger" routerLink="/admin-inicio/ver-menu">Volver</button>
+        </div>
+    </div>
+
+    <form (ngSubmit)="enviarFormulario(f)" #f="ngForm">
+
+        <div class="row mb-3">
+            <div class="col">
+                <input type="text" name="id" placeholder="ID" readonly [(ngModel)]="menu.id" class="form-control">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-12">
+                <sup><i class="fas fa-asterisk"></i></sup><label for="mesanombre" class="form-label">Nombre</label>
+                <input [(ngModel)]="menu.nombre" id="mesanombre" required name="nombre" type="text"
+                    placeholder="Escribe el nombre de tu item de menú" required class="form-control">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-4">
+                <sup><i class="fas fa-asterisk"></i></sup><label for="cantidadpersonas" class="form-label">Cant. de
+                    personas</label>
+                <input [(ngModel)]="menu.cantPersonas" id="cantidadpersonas" required name="cantidadpersonas"
+                    type="number" placeholder="000" required class="form-control">
+            </div>
+            <div class="col-lg-4">
+                <sup><i class="fas fa-asterisk"></i></sup><label for="precio" class="form-label">Precio</label>
+                <input [(ngModel)]="menu.valor" id="precio" required name="precio" type="number" placeholder="$ 000,00"
+                    required class="form-control">
+            </div>
+            <div class="col-lg-4">
+                <sup><i class="fas fa-asterisk"></i></sup><label for="categoria" class="form-label">Categoría</label>
+                <select [(ngModel)]="menu.categoria" id="categoria" required name="categoria" type="text"
+                    placeholder="$ 000,00" required class="form-control">
+                    <option value="">Selecciona una categoría</option>
+                    <option *ngFor="let cat of categorias" [value]="cat.nombre">{{cat.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-6">
+                <sup><i class="fas fa-asterisk"></i></sup><label for="desc" class="form-label">Descripción</label>
+                <textarea 
+                    [(ngModel)]="menu.descripcion"
+                    name="desc" id="desc" rows="10"
+                    required
+                    placeholder="Esmérate con una gran descripción de tu item de menú! Haz que todos quieran ordernarlo!"
+                    class="form-control"></textarea>
+            </div>
+            <div class="col-lg-6">
+                <label for="desc" class="form-label">Imágenes</label>
+                <!-- Componente de imagenes -->
+                <app-uploader (emisorDeArchivos)="obtenerRespuestaDeArchivos( $event )" ></app-uploader>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr>
+                <label class="form-label">Estado del item <small>(click en el estado para cambiarlo)</small></label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="button" (click)="menu.disponibilidad = false" *ngIf="menu.disponibilidad"
+                    class="btn btn-success">
+                    <i class="fas fa-check-circle"></i> Disponible
+                </button>
+                <button type="button" (click)="menu.disponibilidad = true" *ngIf="!menu.disponibilidad"
+                    class="btn btn-danger">
+                    <i class="far fa-times-circle"></i> No disponible
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr>
+                <button class="btn btn-primary">Guardar mesa</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
