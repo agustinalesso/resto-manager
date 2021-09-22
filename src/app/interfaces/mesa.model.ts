@@ -3,4 +3,6 @@ export interface MesaModel {
     numero : number;
     nombre : string;
     activa : boolean;
+    ocupada?: boolean;
+    cantidadComensales?: number;
 }

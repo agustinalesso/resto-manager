@@ -1,1 +1,9 @@
-bienvenida works!
+<div class="content-center">    
+    <span class="sub-title">BIENVENIDO</span>
+    <h1 class="titulo-resto"> {{datos_resto.nombre}}</h1>
+    <p>Estas en la mesa: {{datos_mesa.nombre}} <br>¿Cuántas personas son en tu mesa?</p>
+    <form (ngSubmit)="enviarFormulario(f)" #f="ngForm">
+        <input required class="form-control frmControl" placeholder="0" type="number" name="cantidadComensales" id="cantidadComensales">
+        <button type="submit" >Ingresar</button>
+    </form>
+</div>
