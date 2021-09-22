@@ -61,5 +61,13 @@ export class MesasService {
   eliminarMesa(mesa:MesaModel){
     return this.http.delete<MesaModel>(`${this.DB_URL}${this.DB_NODE}/mesas/${mesa.id}.json`)
   }
-
+  
+  checkInMesa(mesa:MesaModel,mesaId:string, cantidadComensales:number){
+    const mesaTemp : MesaModel = {
+      ...mesa,
+      ocupada: true,
+      cantidadComensales: cantidadComensales
+    }
+    return this.http.put(`${this.DB_URL}${this.DB_NODE}/mesas/${mesaId}.json`,mesaTemp)
+  }
 }
