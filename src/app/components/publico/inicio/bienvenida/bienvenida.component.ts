@@ -19,6 +19,7 @@ export class BienvenidaComponent implements AfterViewInit {
   public datos_mesa! : MesaModel;
   public datos_resto! : RestoData;
   public cantidadComensales! : number;
+
   constructor( private _ms: MesasService, private activatedRoute : ActivatedRoute, private _rs: RestoService, private router: Router ) {
     //Recupero parametros
     this.activatedRoute.params.subscribe(params => {
@@ -37,9 +38,9 @@ export class BienvenidaComponent implements AfterViewInit {
       this.datos_mesa = mesa;
     })
   }
+
   registrarMesa(formulario : NgForm){
 
-  
     if(formulario.invalid){
       Swal.fire('Error','La cantidad de comensales no puede estar vacía','error');
       return;
@@ -52,5 +53,7 @@ export class BienvenidaComponent implements AfterViewInit {
         Swal.fire('Error','La cantidad de comensales no puede ser 0','error');
       }
     }
+
   }
+
 }
