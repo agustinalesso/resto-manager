@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   DB_URL : 'https://isp20-828cd-default-rtdb.firebaseio.com/resto/',
-  DB_NODE : localStorage.getItem('uid_hash'),
+  DB_NODE : localStorage.getItem('uid_hash') ? localStorage.getItem('uid_hash') : localStorage.getItem('public_uid_hash'),
   firebaseConfig : {
     apiKey: "AIzaSyBpVBuWRHDkWh07JhGgnxLVIAWLFgGcPLM",
     authDomain: "isp20-828cd.firebaseapp.com",

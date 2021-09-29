@@ -16,8 +16,6 @@ Ejecutar `ng serve` para levantar un servidor de desarrollo. Navegar a `http://l
 
 # PARA HACER
 
-## Importar los modulos correspondientes para trabajar con Forms
-## Crear la referencia al formulario en el HTML
-## El INPUT del NUMERO tiene que ser obligatorio
-## Si no ingreso ningun dato y aprieta el boton, no lo tienen que dejar pasar
-## Si el valor es mayor a cero, tienen que agarrar la mesa en donde esta sentado el usuario, y actualizarla con un campo nuevo que sea la cantidad de usuarios de la mesa y marcar que la mesa esta tomada.
+## CREAR COMPONENTE CATEGORIA-MENU
+## CREAR LA RUTA DEL COMPONENTE CON EL PARAMETRO
+## CREAR LA FUNCION PARA LLAMAR A ESE COMPONENTE CUANDO SE HAGA CLICK SOBRE UNA CATEGORIA

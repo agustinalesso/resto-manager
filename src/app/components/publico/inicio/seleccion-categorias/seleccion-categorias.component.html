@@ -1,1 +1,5 @@
-<p>seleccion-categorias works!</p>
+<ul class="menu-categorias" *ngIf="categorias">
+    <li (click)="verCategoriaMenu(categoria.nombre)" *ngFor="let categoria of categorias" >
+        {{categoria.nombre}}
+    </li>
+</ul>
