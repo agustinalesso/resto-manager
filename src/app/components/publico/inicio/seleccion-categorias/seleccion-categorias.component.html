@@ -1,5 +1,5 @@
 <ul class="menu-categorias" *ngIf="categorias">
-    <li (click)="verCategoriaMenu(categoria.nombre)" *ngFor="let categoria of categorias" >
+    <li (click)="verCategoriaMenu(categoria.nombre)" *ngFor="let categoria of categorias" class="animate__animated animate__fadeInRight" >
         {{categoria.nombre}}
     </li>
 </ul>
