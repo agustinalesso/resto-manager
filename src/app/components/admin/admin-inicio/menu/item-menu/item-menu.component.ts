@@ -28,7 +28,8 @@ export class ItemMenuComponent implements OnInit {
     disponibilidad: true,
     descripcion: '',
     imagenUrl: [],
-    categoria: ''
+    categoria: '',
+    valor: 0
   }
 
   constructor(private restoService : RestoService, private rl : ActivatedRoute, private menuService : MenuService, private route: Router, private categoriasService : CategoriasService) { }

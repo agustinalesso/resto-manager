@@ -11,10 +11,10 @@
             <hr>
             <div class="form-inputs">
                 <span class="precio">$ {{plato.valor}}</span>
-                <input type="number" placeholder="Cant: 0" name="cantidad" id="cantidad" />
+                <input [(ngModel)]="cantidadAPedir" type="number" placeholder="Cant: 0" name="cantidad" id="cantidad" />
             </div>
             <hr>
-            <button type="button" class="btn btn-success btn-block btn-lg">Agregar al pedido</button>
+            <button (click)="agregarAlPedido()" type="button" class="btn btn-success btn-block btn-lg">Agregar al pedido</button>
         </div>
     </div>
 </div>

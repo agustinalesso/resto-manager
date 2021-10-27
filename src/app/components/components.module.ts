@@ -26,6 +26,7 @@ import { SeleccionCategoriasComponent } from './publico/inicio/seleccion-categor
 import { VerMenuCategoriaComponent } from './publico/inicio/ver-menu-categoria/ver-menu-categoria.component';
 import { FlechaNavegacionComponent } from './shared/flecha-navegacion/flecha-navegacion.component';
 import { VerPlatoComponent } from './publico/inicio/ver-plato/ver-plato.component';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { VerPlatoComponent } from './publico/inicio/ver-plato/ver-plato.componen
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgxQRCodeModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
   ]
 })

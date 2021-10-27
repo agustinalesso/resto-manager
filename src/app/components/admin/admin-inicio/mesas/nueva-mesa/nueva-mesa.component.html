@@ -24,20 +24,29 @@
                 <input [(ngModel)]="mesa.numero" id="mesanumero" required name="numero" type="number" placeholder="Ej: 10" min="1" required class="form-control">
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <hr>
-                <label class="form-label">Estado de la mesa <small>(click en el estado para cambiarlo)</small></label>
+        <div class="row mb-3">
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col">
+                        <hr>
+                        <label class="form-label">Estado de la mesa <small>(click en el estado para cambiarlo)</small></label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" (click)="mesa.activa = false" *ngIf="mesa.activa" class="btn btn-success">
+                            <i class="fas fa-check-circle"></i> Mesa activa
+                        </button>
+                        <button type="button" (click)="mesa.activa = true" *ngIf="!mesa.activa" class="btn btn-danger">
+                            <i class="far fa-times-circle"></i> Mesa desactivada
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <button type="button" (click)="mesa.activa = false" *ngIf="mesa.activa" class="btn btn-success">
-                    <i class="fas fa-check-circle"></i> Mesa activa
-                </button>
-                <button type="button" (click)="mesa.activa = true" *ngIf="!mesa.activa" class="btn btn-danger">
-                    <i class="far fa-times-circle"></i> Mesa desactivada
-                </button>
+            <div class="col-lg-6" *ngIf="mesa.id && qr_url">
+                <hr>
+                <label class="form-label">Código QR de la mesa <small>(click para imprimir)</small></label>
+                <ngx-qrcode [elementType]="elementType" [value]="qr_url" cssClass="qr-code" [errorCorrectionLevel]="errorCorrectionLevel"> </ngx-qrcode>
             </div>
         </div>
         <div class="row">

@@ -52,7 +52,8 @@ export class BienvenidaComponent implements AfterViewInit {
     }else{
       if(this.cantidadComensales > 0){
         this._ms.checkInMesa(this.datos_mesa,this.mesaId,this.cantidadComensales).subscribe(resp => {
-          this.router.navigate(['/inicio/seleccion-categoria'])
+          localStorage.setItem('mesaCheckInLS',this.mesaId);
+          this.router.navigate(['/inicio/seleccion-categoria']);
         });
       }else{
         Swal.fire('Error','La cantidad de comensales no puede ser 0','error');

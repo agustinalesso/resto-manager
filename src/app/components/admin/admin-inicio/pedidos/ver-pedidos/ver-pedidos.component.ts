@@ -1,9 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { MesaModel } from 'src/app/interfaces/mesa.model';
+import { IPedidoActivo } from 'src/app/interfaces/pedidoactivo.interface';
 import { RestoData } from 'src/app/models/restaurant.model';
 import { MesasService } from 'src/app/services/mesas.service';
+import { PedidosService } from 'src/app/services/pedidos.service';
 import { RestoService } from 'src/app/services/resto.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ver-pedidos',
@@ -19,7 +22,7 @@ export class VerPedidosComponent implements OnInit, OnDestroy {
   internalSub! : Subscription;
 
 
-  constructor(private restoService : RestoService, private _ms: MesasService) {}
+  constructor(private restoService : RestoService, private _ms: MesasService, private _ps: PedidosService) {}
 
   ngOnDestroy(){
     clearInterval(this.intervalo);
@@ -56,6 +59,44 @@ export class VerPedidosComponent implements OnInit, OnDestroy {
         })
       },t);
     } );
+  }
+
+  verPedidosDeMesa(mesaId:any){
+    this._ps.obtenerPedidos(mesaId).subscribe( (respuesta:IPedidoActivo[]) => {
+      
+      let html = `<table class="table table-striped">
+                    <thead>
+                      <th>Cant.</th>
+                      <th>Plato</th>
+                      <th>Precio</th>
+                      <th>Estado</th>
+                    </thead>
+                    <tbody>`
+
+      let fila = ``;
+      respuesta.forEach(pedido => {
+
+        let msg = pedido.entregado ? '<span class="badge bg-success">Entregado</span>':'<span class="badge bg-danger">Sin entregar</span>'
+
+        fila += `<tr>
+                  <td>${pedido.cantidad}</td>
+                  <td>${pedido.nombre}</td>
+                  <td>$ ${pedido.precio}</td>
+                  <td>${msg}</td>
+                </tr>`
+
+      })
+
+      html += fila + `</tbody></table>`
+
+      Swal.fire({
+        showCloseButton: true,
+        width: '70%',
+        title: 'Pedido',
+        html: html
+      })
+
+    })
   }
 
 }

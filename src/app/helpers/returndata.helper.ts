@@ -10,3 +10,14 @@ export const retornaData = (snapshot : firebase.firestore.QuerySnapshot ) => {
       })
     return documentos
 }
+
+export const arreglarObjeto = (parm: any) => {
+  if(parm === null){return [];}
+  const item : any[] = [];
+  Object.keys(parm).forEach( key => {
+    const obj = parm[key];
+    obj.id = key;
+    item.push(obj);
+  })
+  return item;
+}

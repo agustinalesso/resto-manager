@@ -22,7 +22,7 @@
             </td>
             <td> {{mesa.cantidadComensales}} </td>
             <td style="width:170px;">
-                <button *ngIf="mesa.ocupada" type="button" class="btn btn-primary"><i class="fas fa-pizza-slice"></i> Ver pedidos</button>
+                <button *ngIf="mesa.ocupada" (click)="verPedidosDeMesa(mesa.id)" type="button" class="btn btn-primary"><i class="fas fa-pizza-slice"></i> Ver pedidos</button>
             </td>
         </tr>
     </tbody>

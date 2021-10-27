@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import { MesaModel } from 'src/app/interfaces/mesa.model';
 import { RestoData } from 'src/app/models/restaurant.model';
 import { MesasService } from 'src/app/services/mesas.service';
 import { RestoService } from 'src/app/services/resto.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-nueva-mesa',
@@ -17,6 +19,10 @@ export class NuevaMesaComponent implements OnInit {
 
   mensaje : string = '';
   mesaId : any | null = '';
+
+  elementType: NgxQrcodeElementTypes = NgxQrcodeElementTypes.URL;
+  errorCorrectionLevel: NgxQrcodeErrorCorrectionLevels = NgxQrcodeErrorCorrectionLevels.LOW;
+  qr_url = ``;
 
   mesa : MesaModel = {
     numero: 0,
@@ -39,8 +45,12 @@ export class NuevaMesaComponent implements OnInit {
       this.mesasService.obtenerMesaIndividual(this.mesaId).subscribe(resp => {
         this.mesa = resp;
         this.mesa.id = this.mesaId
+        this.qr_url = `${environment.BASE_URL}/#/inicio/bienvenida/${environment.DB_NODE}/${this.mesa.id}`
+        console.log(this.qr_url);
       })
     }
+    
+
 
   }
 
