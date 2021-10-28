@@ -46,7 +46,6 @@ export class NuevaMesaComponent implements OnInit {
         this.mesa = resp;
         this.mesa.id = this.mesaId
         this.qr_url = `${environment.BASE_URL}/#/inicio/bienvenida/${environment.DB_NODE}/${this.mesa.id}`
-        console.log(this.qr_url);
       })
     }
     
@@ -64,8 +63,7 @@ export class NuevaMesaComponent implements OnInit {
       })
     }else{
       this.mesasService.crearMesa(this.mesa).subscribe(resp => {
-        console.log(resp);
-        //this.route.navigate(['admin-inicio/ver-mesas'])
+        this.route.navigate(['admin-inicio/ver-mesas'])
       })    
     }
 

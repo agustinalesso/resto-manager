@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RestoService } from 'src/app/services/resto.service';
 
 @Component({
   selector: 'app-inicio',
@@ -7,10 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioComponent implements OnInit {
 
-  constructor(){}
+  restoNombre : string = '';
+  mesaId!: string | null;
+
+  constructor(private rs: RestoService){
+    this.rs.obtenerRestaurant().subscribe(resp => {
+      this.restoNombre = resp.nombre
+    })
+  }
   
-  ngOnInit() {    
+  ngOnInit() {
+
+    const intervalo = setInterval(() => {
+      if(localStorage.getItem('mesaCheckInLS')){
+        this.mesaId = localStorage.getItem('mesaCheckInLS')
+        clearInterval(intervalo)
+      }
+    },100)
+
   }  
+
 
 
 }

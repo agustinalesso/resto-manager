@@ -5,4 +5,6 @@ export interface MesaModel {
     activa : boolean;
     ocupada?: boolean;
     cantidadComensales?: number;
+    pedidosSinEntregar?: number;
+    pedidoactivo?: any[];
 }

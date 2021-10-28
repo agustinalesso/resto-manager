@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MesaModel } from 'src/app/interfaces/mesa.model';
@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   templateUrl: './bienvenida.component.html',
   styleUrls: ['./bienvenida.component.styl']
 })
-export class BienvenidaComponent implements AfterViewInit {
+export class BienvenidaComponent implements OnInit {
 
   private restoId : string = '';
   private mesaId : string = '';
@@ -33,7 +33,7 @@ export class BienvenidaComponent implements AfterViewInit {
     })
   }
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     //Recupero datos del restaurant
     this._rs.public_obtenerRestaurant(this.restoId).subscribe(rd => {
       this.datos_resto = rd;

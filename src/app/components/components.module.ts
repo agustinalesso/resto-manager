@@ -27,6 +27,9 @@ import { VerMenuCategoriaComponent } from './publico/inicio/ver-menu-categoria/v
 import { FlechaNavegacionComponent } from './shared/flecha-navegacion/flecha-navegacion.component';
 import { VerPlatoComponent } from './publico/inicio/ver-plato/ver-plato.component';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { PublicSidebarComponent } from './shared/public-sidebar/public-sidebar.component';
+import { PublicSidebarContentComponent } from './shared/public-sidebar-content/public-sidebar-content.component';
+import { AdminPedidoMesaComponent } from './shared/admin-pedido-mesa/admin-pedido-mesa.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,10 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     SeleccionCategoriasComponent,
     VerMenuCategoriaComponent,
     FlechaNavegacionComponent,
-    VerPlatoComponent
+    VerPlatoComponent,
+    PublicSidebarComponent,
+    PublicSidebarContentComponent,
+    AdminPedidoMesaComponent
   ],
   imports: [
     CommonModule,
@@ -57,6 +63,30 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
     HttpClientModule,
     NgxQRCodeModule,
     AngularFireModule.initializeApp(environment.firebaseConfig)
+  ],
+  exports: [
+    AdminInicioComponent,
+    InicioComponent,
+    VerMenuComponent,
+    ItemMenuComponent,
+    VerMesasComponent,
+    NuevaMesaComponent,
+    VerMovimientosComponent,
+    VerPedidosComponent,
+    ConfiguracionComponent,
+    CerrarSesionComponent,
+    VerCategoriasComponent,
+    NuevaCategoriasComponent,
+    UploaderComponent,
+    DragdropDirective,
+    BienvenidaComponent,
+    SeleccionCategoriasComponent,
+    VerMenuCategoriaComponent,
+    FlechaNavegacionComponent,
+    VerPlatoComponent,
+    PublicSidebarComponent,
+    PublicSidebarContentComponent,
+    AdminPedidoMesaComponent
   ]
 })
 export class ComponentsModule { }

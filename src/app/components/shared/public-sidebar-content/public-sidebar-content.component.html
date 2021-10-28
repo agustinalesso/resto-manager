@@ -1,0 +1,30 @@
+<h2><span class="badge bg-info text-white">Mi pedido</span></h2>
+<hr class="bg-white">
+<div class="alert alert-info" role="alert" *ngIf="cargando">
+    <i class="fas fa-spinner fa-spin"></i> Cargando datos...
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="!cargando && datos_pedido.length == 0">
+    No has ordenado nada todavía.
+</div>
+<div class="container-pedido" *ngIf="!cargando && datos_pedido.length > 0">
+    <table class="table table-dark table-hover">
+        <thead>
+            <th>Pedido</th>
+            <th>Estado</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let pedido of datos_pedido">
+                <td>{{pedido.cantidad}} x {{pedido.nombre}}</td>
+                <td>
+                    <span *ngIf="pedido.entregado" class="badge bg-success text-white">Entregado</span>
+                    <span *ngIf="!pedido.entregado" class="badge bg-danger text-white">En espera</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<hr *ngIf="!cargando && datos_pedido.length > 0" class="bg-white">
+<h2 *ngIf="!cargando && datos_pedido.length > 0" class="text-white text-right">Total: <span class="badge bg-primary text-white">$ {{totalPedido}}</span></h2>
+<hr *ngIf="!cargando && datos_pedido.length > 0" class="bg-white">
+<button *ngIf="!cargando && datos_pedido.length > 0" class="btn btn-block btn-primary">Pedir la cuenta</button>
+<button *ngIf="!cargando && datos_pedido.length == 0" class="btn btn-block btn-danger">Retirarte de la mesa</button>

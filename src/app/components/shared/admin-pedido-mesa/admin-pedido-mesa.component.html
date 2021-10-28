@@ -1,0 +1,29 @@
+<div class="wrapper">
+    <div *ngIf="mesa">
+        <h3>Pedidos de {{mesa.nombre}}</h3>
+        <hr>
+        <table class="table table-striped table-hover">
+            <thead>
+                <th>Cantidad</th>
+                <th>Plato</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pedido of pedidos; let i = index">
+                    <td>x{{pedido.cantidad}}</td>
+                    <td>{{pedido.nombre}}</td>
+                    <td>{{pedido.precio}}</td>
+                    <td>
+                        <span *ngIf="!pedido.entregado" class="badge bg-danger text-white">No entregado</span>
+                        <span *ngIf="pedido.entregado" class="badge bg-success text-white">Entregado</span>
+                    </td>
+                    <td>
+                        <button *ngIf="!pedido.entregado" class="btn btn-danger btn-small" (click)="entregarPedido(i)">Entregar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

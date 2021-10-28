@@ -21,4 +21,8 @@ export class PedidosService {
     return this.http.post<IPedidoActivo>(`${environment.DB_URL}${environment.DB_NODE}/mesas/${mesaId}/pedidoactivo.json`, pedido)
   }
 
+  entregarPedido(mesaId:string, pedido:IPedidoActivo, pedidoId: string){
+    return this.http.put<IPedidoActivo>(`${environment.DB_URL}${environment.DB_NODE}/mesas/${mesaId}/pedidoactivo/${pedidoId}.json`, pedido)
+  }
+
 }

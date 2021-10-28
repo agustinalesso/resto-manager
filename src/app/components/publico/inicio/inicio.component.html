@@ -1,7 +1,9 @@
 <div class="rm-fullContainer">
 
-    <h1 class="titulo">Bienvenidos!</h1>
+    <h1 class="titulo text-center">{{restoNombre}}</h1>
 
     <router-outlet></router-outlet>
+
+    <app-public-sidebar *ngIf="mesaId"></app-public-sidebar>
 
 </div>

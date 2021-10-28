@@ -9,6 +9,7 @@
             <th>Ocupada/Desocupada</th>
             <th>Cantidad de personas</th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -22,8 +23,18 @@
             </td>
             <td> {{mesa.cantidadComensales}} </td>
             <td style="width:170px;">
-                <button *ngIf="mesa.ocupada" (click)="verPedidosDeMesa(mesa.id)" type="button" class="btn btn-primary"><i class="fas fa-pizza-slice"></i> Ver pedidos</button>
+                <button *ngIf="mesa.ocupada" (click)="verPedidosDeMesa(mesa.id)" type="button" class="btn btn-primary"><i class="fas fa-pizza-slice"></i> Pedidos <span *ngIf="mesa.pedidosSinEntregar && mesa.pedidosSinEntregar > 0" class="badge bg-danger">{{mesa.pedidosSinEntregar}}</span></button>
+            </td>
+            <td style="width:170px;">
+                <button *ngIf="mesa.ocupada" (click)="verPedidosDeMesa(mesa.id)" type="button" class="btn btn-success"><i class="fas fa-money-check"></i> Cobrar</button>
             </td>
         </tr>
     </tbody>
 </table>
+
+<div class="pedidos-de-mesa" *ngIf="popupabierto">
+    <div class="btn-close" (click)="cerrarPopup()">
+        <i class="fas fa-times-circle"></i>
+    </div>
+    <app-admin-pedido-mesa [mesaId]="carrier_mesa" [pedidos]="carrier_pedidos"></app-admin-pedido-mesa>
+</div>

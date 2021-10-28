@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MenuModel } from 'src/app/interfaces/menu.interface';
 import { IPedidoActivo } from 'src/app/interfaces/pedidoactivo.interface';
 import { MenuService } from 'src/app/services/menu.service';
@@ -19,7 +19,7 @@ export class VerPlatoComponent implements OnInit {
   cantidadAPedir! : number;
   mesaId! : string;
 
-  constructor(private _ms:MenuService, private _ar:ActivatedRoute, private _ps: PedidosService) { 
+  constructor(private _ms:MenuService, private _ar:ActivatedRoute, private _ps: PedidosService, private router: Router) { 
 
     this._ar.params.subscribe(params => {
       this.menuItemId = params['id'];
@@ -53,7 +53,9 @@ export class VerPlatoComponent implements OnInit {
       }
 
       this._ps.enviarPedido(mesaId,pedido).subscribe(respuesta => {
-        console.log(respuesta);
+        
+        Swal.fire('Excelente!','Tu pedido ha sido tomado! Te notificaremos cuando esté siendo preparado','success');
+        this.router.navigate(['/inicio/seleccion-categoria']);
       })
 
     }else{

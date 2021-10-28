@@ -1,12 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { arreglarObjeto } from 'src/app/helpers/returndata.helper';
 import { MesaModel } from 'src/app/interfaces/mesa.model';
 import { IPedidoActivo } from 'src/app/interfaces/pedidoactivo.interface';
 import { RestoData } from 'src/app/models/restaurant.model';
 import { MesasService } from 'src/app/services/mesas.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { RestoService } from 'src/app/services/resto.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ver-pedidos',
@@ -20,6 +20,9 @@ export class VerPedidosComponent implements OnInit, OnDestroy {
   datos_mesas : MesaModel[] = [];
   intervalo : any;
   internalSub! : Subscription;
+  carrier_mesa: string = '';
+  popupabierto : boolean = false;
+  carrier_pedidos: IPedidoActivo[] = [];
 
 
   constructor(private restoService : RestoService, private _ms: MesasService, private _ps: PedidosService) {}
@@ -42,6 +45,17 @@ export class VerPedidosComponent implements OnInit, OnDestroy {
     //Ejecuto la funcion para escuchar y me suscribo
     this.internalSub = this.escucharCambiosMesas(5000).subscribe(data => {
       //Cada 5 segundos me devuelve la data
+
+      data.map(item => {
+        if(item.pedidoactivo){
+          item.pedidoactivo = arreglarObjeto(item.pedidoactivo)
+          const pedidosSinTomar : any[] = item.pedidoactivo.filter(p => p.entregado == false)
+          if(pedidosSinTomar && pedidosSinTomar.length > 0){
+            item.pedidosSinEntregar = pedidosSinTomar.length
+          }
+        }
+      })
+
       this.datos_mesas = data;
     });
 
@@ -61,42 +75,23 @@ export class VerPedidosComponent implements OnInit, OnDestroy {
     } );
   }
 
+  public static entregarPedido(index:number){
+    console.log(index);
+  }
+  
   verPedidosDeMesa(mesaId:any){
     this._ps.obtenerPedidos(mesaId).subscribe( (respuesta:IPedidoActivo[]) => {
       
-      let html = `<table class="table table-striped">
-                    <thead>
-                      <th>Cant.</th>
-                      <th>Plato</th>
-                      <th>Precio</th>
-                      <th>Estado</th>
-                    </thead>
-                    <tbody>`
+      this.carrier_mesa = mesaId;
+      this.carrier_pedidos = respuesta;
 
-      let fila = ``;
-      respuesta.forEach(pedido => {
-
-        let msg = pedido.entregado ? '<span class="badge bg-success">Entregado</span>':'<span class="badge bg-danger">Sin entregar</span>'
-
-        fila += `<tr>
-                  <td>${pedido.cantidad}</td>
-                  <td>${pedido.nombre}</td>
-                  <td>$ ${pedido.precio}</td>
-                  <td>${msg}</td>
-                </tr>`
-
-      })
-
-      html += fila + `</tbody></table>`
-
-      Swal.fire({
-        showCloseButton: true,
-        width: '70%',
-        title: 'Pedido',
-        html: html
-      })
+      this.popupabierto = true;
 
     })
+  }
+
+  cerrarPopup(){
+    this.popupabierto = false;
   }
 
 }

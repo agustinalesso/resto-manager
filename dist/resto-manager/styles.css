@@ -15,6 +15,9 @@ h1.titulo-header span.badge {
 hr.barra-header {
   background-color: #95a3b3;
 }
+.qr-code img {
+  width: 100%;
+}
 
 
 /*# sourceMappingURL=styles.css.map*/
