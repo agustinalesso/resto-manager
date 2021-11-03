@@ -10,12 +10,3 @@ Recordar la ejecución de `npm install` para instalar todas las dependencias de 
 ## Desarrollo
 
 Ejecutar `ng serve` para levantar un servidor de desarrollo. Navegar a `http://localhost:4200/`. La aplicación refrescará automáticamente a partir de aquí todos los cambios.
-
-
-
-
-# PARA HACER
-
-## CREAR COMPONENTE CATEGORIA-MENU
-## CREAR LA RUTA DEL COMPONENTE CON EL PARAMETRO
-## CREAR LA FUNCION PARA LLAMAR A ESE COMPONENTE CUANDO SE HAGA CLICK SOBRE UNA CATEGORIA
