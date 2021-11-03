@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/agustinalesso/Desktop/PractProf_II/resto-manager/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /Users/agustinalesso/Desktop/Practicas_Prof_II/resto-manager/src/polyfills.ts */"hN/g");
 
 
 /***/ }),
