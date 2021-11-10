@@ -43,12 +43,12 @@ export class VerPedidosComponent implements OnInit, OnDestroy {
     })
 
     //Ejecuto la funcion para escuchar y me suscribo
-    this.internalSub = this.escucharCambiosMesas(5000).subscribe(data => {
+    this.internalSub = this.escucharCambiosMesas(1000).subscribe(data => {
       //Cada 5 segundos me devuelve la data
 
-      data.map(item => {
+      data.map( async (item) => {
         if(item.pedidoactivo){
-          item.pedidoactivo = arreglarObjeto(item.pedidoactivo)
+          item.pedidoactivo = await arreglarObjeto(item.pedidoactivo)
           const pedidosSinTomar : any[] = item.pedidoactivo.filter(p => p.entregado == false)
           if(pedidosSinTomar && pedidosSinTomar.length > 0){
             item.pedidosSinEntregar = pedidosSinTomar.length
@@ -80,10 +80,10 @@ export class VerPedidosComponent implements OnInit, OnDestroy {
   }
   
   verPedidosDeMesa(mesaId:any){
-    this._ps.obtenerPedidos(mesaId).subscribe( (respuesta:IPedidoActivo[]) => {
+    this._ps.obtenerPedidos(mesaId).subscribe( async (respuesta:IPedidoActivo[]) => {
       
       this.carrier_mesa = mesaId;
-      this.carrier_pedidos = respuesta;
+      this.carrier_pedidos = await arreglarObjeto(respuesta);
 
       this.popupabierto = true;
 

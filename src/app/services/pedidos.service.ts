@@ -13,8 +13,7 @@ export class PedidosService {
   constructor( private http : HttpClient ) { }
 
   obtenerPedidos(mesaId:string){
-    return this.http.get<IPedidoActivo[]>(`${environment.DB_URL}${environment.DB_NODE}/mesas/${mesaId}/pedidoactivo.json`)
-            .pipe(map(arreglarObjeto));
+    return this.http.get<IPedidoActivo[]>(`${environment.DB_URL}${environment.DB_NODE}/mesas/${mesaId}/pedidoactivo.json`);
   }
 
   enviarPedido(mesaId:string, pedido:IPedidoActivo){

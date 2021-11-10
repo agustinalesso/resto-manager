@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { arreglarObjeto } from 'src/app/helpers/returndata.helper';
 import { MesaModel } from 'src/app/interfaces/mesa.model';
 import { IPedidoActivo } from 'src/app/interfaces/pedidoactivo.interface';
 import { MesasService } from 'src/app/services/mesas.service';
@@ -56,9 +57,9 @@ export class PublicSidebarContentComponent implements OnInit {
   ngOnInit(): void {
 
     //Ejecuto la funcion para escuchar y me suscribo
-    this.internalSub = this.escucharCambiosPedidos(1000).subscribe(data => {
+    this.internalSub = this.escucharCambiosPedidos(1000).subscribe( async (data) => {
       //Cada 5 segundos me devuelve la data
-      this.datos_pedido = data;
+      this.datos_pedido = await arreglarObjeto(data);
 
       this.totalPedido = 0
 
