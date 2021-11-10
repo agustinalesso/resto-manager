@@ -26,7 +26,7 @@
                 <button *ngIf="mesa.ocupada" (click)="verPedidosDeMesa(mesa.id)" type="button" class="btn btn-primary"><i class="fas fa-pizza-slice"></i> Pedidos <span *ngIf="mesa.pedidosSinEntregar && mesa.pedidosSinEntregar > 0" class="badge bg-danger">{{mesa.pedidosSinEntregar}}</span></button>
             </td>
             <td style="width:170px;">
-                <button *ngIf="mesa.ocupada" (click)="verPedidosDeMesa(mesa.id)" type="button" class="btn btn-success"><i class="fas fa-money-check"></i> Cobrar</button>
+                <button *ngIf="mesa.ocupada && mesa.pedirCuenta" (click)="verPedidosDeMesa(mesa.id)" type="button" class="btn btn-success"><i class="fas fa-money-check"></i> Cobrar</button>
             </td>
         </tr>
     </tbody>

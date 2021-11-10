@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  BASE_URL: 'https://isp20-828cd.web.app',
+  BASE_URL: 'http://localhost:4200',
   DB_URL : 'https://isp20-828cd-default-rtdb.firebaseio.com/resto/',
   DB_NODE : localStorage.getItem('uid_hash') ? localStorage.getItem('uid_hash') : localStorage.getItem('public_uid_hash'),
   firebaseConfig : {

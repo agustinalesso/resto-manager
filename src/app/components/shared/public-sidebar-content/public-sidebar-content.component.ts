@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { MesaModel } from 'src/app/interfaces/mesa.model';
 import { IPedidoActivo } from 'src/app/interfaces/pedidoactivo.interface';
+import { MesasService } from 'src/app/services/mesas.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-public-sidebar-content',
@@ -16,8 +19,11 @@ export class PublicSidebarContentComponent implements OnInit {
   mesaId: string | null = localStorage.getItem('mesaCheckInLS');
   totalPedido: number = 0;
   cargando: boolean = true;
+  miMesa!: MesaModel;
+  //output para el parent
+  @Output() cerrarSidebar: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private _ps: PedidosService) { }
+  constructor(private _ps: PedidosService, private _ms:MesasService) { }
 
   // => Funcion que devuelve Observable
   escucharCambiosPedidos(t:number) {
@@ -35,6 +41,18 @@ export class PublicSidebarContentComponent implements OnInit {
     } );
   }
 
+  pedirCuentaDeMesa(){
+      this._ms.pedirCuentaDeMesa(this.miMesa,this.mesaId).subscribe(resp => {
+        this.cerrarSidebar.emit(true);
+        Swal.fire({
+          title: 'Cuenta de Mesa',
+          text: 'Se ha enviado el pedido de cuenta de la mesa',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+      });
+  }
+
   ngOnInit(): void {
 
     //Ejecuto la funcion para escuchar y me suscribo
@@ -50,6 +68,12 @@ export class PublicSidebarContentComponent implements OnInit {
 
       this.cargando = false;
 
+      this.miMesa.pedidoactivo = this.datos_pedido;
+
+    });
+
+    this._ms.obtenerMesaIndividual(this.mesaId).subscribe(resp => {
+      this.miMesa = resp;
     });
 
   }

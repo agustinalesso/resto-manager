@@ -71,4 +71,12 @@ export class MesasService {
     return this.http.put(`${this.DB_URL}${this.DB_NODE}/mesas/${mesaId}.json`,mesaTemp)
   }
 
+  pedirCuentaDeMesa(mesa:MesaModel, mesaId:string | null){
+    const mesaTemp : MesaModel = {
+      ...mesa,
+      pedirCuenta: true
+    }
+    return this.http.put(`${this.DB_URL}${this.DB_NODE}/mesas/${mesaId}.json`,mesaTemp)
+  }
+
 }

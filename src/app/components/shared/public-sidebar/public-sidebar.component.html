@@ -1,6 +1,6 @@
 <div class="ps-wrapper" [ngClass]="{ 'expanded':expandido, 'collapsed':!expandido }">
     <div class="content-wrapper">
-        <app-public-sidebar-content></app-public-sidebar-content>
+        <app-public-sidebar-content (cerrarSidebar)="cerrarSidebar($event)"></app-public-sidebar-content>
     </div>
     <i (click)="expandirColapsar()" class="fas fa-arrow-circle-right toggle-menu" [ngClass]="{ 'expanded' : expandido, 'collapsed':!expandido }"></i>
 </div>

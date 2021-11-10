@@ -18,4 +18,10 @@ export class PublicSidebarComponent implements OnInit {
     this.expandido = !this.expandido
   }
 
+  cerrarSidebar( $event:boolean ){
+    if( $event ){
+      this.expandido = false;
+    }
+  }
+
 }
