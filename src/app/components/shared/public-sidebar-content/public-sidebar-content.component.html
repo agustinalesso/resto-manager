@@ -27,4 +27,4 @@
 <h2 *ngIf="!cargando && datos_pedido.length > 0" class="text-white text-right">Total: <span class="badge bg-primary text-white">$ {{totalPedido}}</span></h2>
 <hr *ngIf="!cargando && datos_pedido.length > 0" class="bg-white">
 <button *ngIf="!cargando && datos_pedido.length > 0" class="btn btn-block btn-primary" (click)="pedirCuentaDeMesa()">Pedir la cuenta</button>
-<button *ngIf="!cargando && datos_pedido.length == 0" class="btn btn-block btn-danger">Retirarte de la mesa</button>
+<button *ngIf="!cargando && datos_pedido.length == 0" class="btn btn-block btn-danger" (click)="retirarse()">Retirarte de la mesa</button>

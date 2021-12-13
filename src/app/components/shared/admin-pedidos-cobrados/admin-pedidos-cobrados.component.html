@@ -1,0 +1,28 @@
+<div class="wrapper">
+    <div *ngIf="mesa">
+        <h3>Pedidos de {{mesa.nombre}} - Total Cobrado: $ {{totalDeLaMesa}}</h3>
+        <hr>
+        <table class="table table-striped table-hover">
+            <thead>
+                <th>Fecha</th>
+                <th>Detalle</th>
+                <th>Precio Total</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pedido of pedidosCobrados">
+                    <td>{{pedido.fecha | date:'medium'}}</td>
+                    <td>
+                        <ul>
+                            <li *ngFor="let detalle of pedido">
+                                {{detalle.nombre}} x ${{detalle.precio}}
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        ${{pedido.precioTotal}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

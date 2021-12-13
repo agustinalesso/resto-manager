@@ -24,4 +24,8 @@ export class PedidosService {
     return this.http.put<IPedidoActivo>(`${environment.DB_URL}${environment.DB_NODE}/mesas/${mesaId}/pedidoactivo/${pedidoId}.json`, pedido)
   }
 
+  obtenerPedidosCobrados(mesaId:string){
+    return this.http.get(`${environment.DB_URL}${environment.DB_NODE}/mesas/${mesaId}/pedidosCobrados.json`);
+  }
+
 }

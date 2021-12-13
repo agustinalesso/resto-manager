@@ -27,7 +27,8 @@ export class NuevaMesaComponent implements OnInit {
   mesa : MesaModel = {
     numero: 0,
     activa: true,
-    nombre: ''
+    nombre: '',
+    pedidosCobrados: []
   };
 
   constructor(private restoService : RestoService, private rl : ActivatedRoute, private mesasService : MesasService, private route: Router) {}

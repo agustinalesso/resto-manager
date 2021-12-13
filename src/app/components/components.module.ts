@@ -30,6 +30,7 @@ import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { PublicSidebarComponent } from './shared/public-sidebar/public-sidebar.component';
 import { PublicSidebarContentComponent } from './shared/public-sidebar-content/public-sidebar-content.component';
 import { AdminPedidoMesaComponent } from './shared/admin-pedido-mesa/admin-pedido-mesa.component';
+import { AdminPedidosCobradosComponent } from './shared/admin-pedidos-cobrados/admin-pedidos-cobrados.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { AdminPedidoMesaComponent } from './shared/admin-pedido-mesa/admin-pedid
     VerPlatoComponent,
     PublicSidebarComponent,
     PublicSidebarContentComponent,
-    AdminPedidoMesaComponent
+    AdminPedidoMesaComponent,
+    AdminPedidosCobradosComponent
   ],
   imports: [
     CommonModule,
@@ -86,7 +88,8 @@ import { AdminPedidoMesaComponent } from './shared/admin-pedido-mesa/admin-pedid
     VerPlatoComponent,
     PublicSidebarComponent,
     PublicSidebarContentComponent,
-    AdminPedidoMesaComponent
+    AdminPedidoMesaComponent,
+    AdminPedidosCobradosComponent
   ]
 })
 export class ComponentsModule { }

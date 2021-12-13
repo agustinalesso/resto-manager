@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { arreglarObjeto } from 'src/app/helpers/returndata.helper';
 import { MesaModel } from 'src/app/interfaces/mesa.model';
@@ -24,7 +25,7 @@ export class PublicSidebarContentComponent implements OnInit {
   //output para el parent
   @Output() cerrarSidebar: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private _ps: PedidosService, private _ms:MesasService) { }
+  constructor(private _ps: PedidosService, private _ms:MesasService, private router: Router) { }
 
   // => Funcion que devuelve Observable
   escucharCambiosPedidos(t:number) {
@@ -43,6 +44,10 @@ export class PublicSidebarContentComponent implements OnInit {
   }
 
   pedirCuentaDeMesa(){
+
+    this._ms.obtenerMesaIndividual(this.mesaId).subscribe(resp => {
+      this.miMesa = resp;
+
       this._ms.pedirCuentaDeMesa(this.miMesa,this.mesaId).subscribe(resp => {
         this.cerrarSidebar.emit(true);
         Swal.fire({
@@ -52,24 +57,22 @@ export class PublicSidebarContentComponent implements OnInit {
           confirmButtonText: 'OK'
         })
       });
+
+    });
+
   }
 
   ngOnInit(): void {
-
     //Ejecuto la funcion para escuchar y me suscribo
     this.internalSub = this.escucharCambiosPedidos(1000).subscribe( async (data) => {
       //Cada 5 segundos me devuelve la data
       this.datos_pedido = await arreglarObjeto(data);
-
       this.totalPedido = 0
-
       this.datos_pedido.forEach(pedido => {
         this.totalPedido += pedido.precio;
       })
-
       this.cargando = false;
-
-      this.miMesa.pedidoactivo = this.datos_pedido;
+      this.miMesa.pedidoactivo = data;
 
     });
 
@@ -77,6 +80,49 @@ export class PublicSidebarContentComponent implements OnInit {
       this.miMesa = resp;
     });
 
+  }
+
+  retirarse(){
+    this.cerrarSidebar.emit(true);
+    //Swal confirmation
+    Swal.fire({
+      title: 'Retirarse',
+      text: '¿Está seguro que desea retirarse?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, retirarse!'
+    }).then((result) => {
+      if(result.isConfirmed){
+        if(this.mesaId){
+
+          this._ms.obtenerMesaIndividual(this.mesaId).subscribe(resp => {
+            this.miMesa = resp;
+
+            const mesa: MesaModel = this.miMesa;
+
+            if(this.mesaId){
+              this._ms.cerrarMesa(mesa, this.mesaId).subscribe(resp => {
+                Swal.fire(
+                  'Retirado',
+                  'Se ha retirado la mesa',
+                  'success'
+                )
+  
+                //Delete 'public_uid_hash' and 'mesaCheckInLS' from localStorage 
+                localStorage.removeItem('public_uid_hash');
+                localStorage.removeItem('mesaCheckInLS');
+  
+                this.router.navigate(['/']);
+              });
+            }
+
+          });
+
+        }
+      }
+    });
   }
 
 }

@@ -7,6 +7,7 @@ import { RestoData } from 'src/app/models/restaurant.model';
 import { MesasService } from 'src/app/services/mesas.service';
 import { PedidosService } from 'src/app/services/pedidos.service';
 import { RestoService } from 'src/app/services/resto.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ver-pedidos',
@@ -44,8 +45,7 @@ export class VerPedidosComponent implements OnInit, OnDestroy {
 
     //Ejecuto la funcion para escuchar y me suscribo
     this.internalSub = this.escucharCambiosMesas(1000).subscribe(data => {
-      //Cada 5 segundos me devuelve la data
-
+      //Cada 1 segundo me devuelve la data
       data.map( async (item) => {
         if(item.pedidoactivo){
           item.pedidoactivo = await arreglarObjeto(item.pedidoactivo)
@@ -55,10 +55,8 @@ export class VerPedidosComponent implements OnInit, OnDestroy {
           }
         }
       })
-
       this.datos_mesas = data;
     });
-
   }
 
   // => Funcion que devuelve Observable
@@ -74,24 +72,44 @@ export class VerPedidosComponent implements OnInit, OnDestroy {
       },t);
     } );
   }
-
-  public static entregarPedido(index:number){
-    console.log(index);
-  }
   
   verPedidosDeMesa(mesaId:any){
     this._ps.obtenerPedidos(mesaId).subscribe( async (respuesta:IPedidoActivo[]) => {
-      
       this.carrier_mesa = mesaId;
       this.carrier_pedidos = await arreglarObjeto(respuesta);
-
       this.popupabierto = true;
-
     })
   }
 
   cerrarPopup(){
     this.popupabierto = false;
+  }
+
+  marcarPagoDeMesa(mesa:MesaModel, mesaId:any){
+    //Obtengo el pedido activo que es el que tengo que cobrar
+    this._ps.obtenerPedidos(mesaId).subscribe( async (respuesta:IPedidoActivo[]) => {
+      //lo ajusto con el fixer
+      const pedido = await arreglarObjeto(respuesta);
+      //marco el pago de la mesa y genero el nuevo registro de pago
+      this._ms.marcarPagoDeMesa(mesa,mesaId,pedido).subscribe( async (respuesta:any) => {
+        //recupero la mesa ya actualizada
+        this._ms.obtenerMesaIndividual(mesaId).subscribe( async (respuesta: MesaModel) => {
+          //le quito el pedido activo (porque lo acabo de cobrar y el pedido de cuenta)
+          delete respuesta.pedidoactivo;
+          delete respuesta.pedirCuenta;
+          respuesta.id = mesaId;
+          //Actualizo la mesa
+          this._ms.actualizarMesa(respuesta).subscribe( async (respuesta:any) => {
+            Swal.fire(
+              '¡Éxito!',
+              'Hemos notificado a la mesa que el abono se ha realizado',
+              'success'
+            );
+          });
+        })
+      
+      });
+    })
   }
 
 }

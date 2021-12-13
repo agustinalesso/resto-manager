@@ -7,5 +7,6 @@ export interface MesaModel {
     cantidadComensales?: number;
     pedidosSinEntregar?: number;
     pedidoactivo?: any[];
+    pedidosCobrados?: any[];
     pedirCuenta?: boolean;
 }

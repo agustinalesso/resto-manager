@@ -58,6 +58,21 @@ export class MesasService {
     return this.http.put(`${this.DB_URL}${this.DB_NODE}/mesas/${mesa.id}.json`,mesaTemp)
   }
 
+  cerrarMesa( mesa : MesaModel , mesaId: string){
+
+    const mesaTemp : MesaModel = {
+      ...mesa
+    }
+    delete mesaTemp.id;
+    delete mesaTemp.pedirCuenta;
+    delete mesaTemp.ocupada;
+    delete mesaTemp.cantidadComensales;
+    delete mesaTemp.pedidoactivo;
+
+    return this.http.put(`${this.DB_URL}${this.DB_NODE}/mesas/${mesaId}.json`,mesaTemp)
+
+  }
+
   eliminarMesa(mesa:MesaModel){
     return this.http.delete<MesaModel>(`${this.DB_URL}${this.DB_NODE}/mesas/${mesa.id}.json`)
   }
@@ -77,6 +92,22 @@ export class MesasService {
       pedirCuenta: true
     }
     return this.http.put(`${this.DB_URL}${this.DB_NODE}/mesas/${mesaId}.json`,mesaTemp)
+  }
+
+  marcarPagoDeMesa(mesa:MesaModel, mesaId:string, pedidos: any){
+    const fechaCobro = new Date();
+    //remove property id from every object in pedidos
+    const pedidosTemp = pedidos.map((pedido:any) => {
+      const pedidoTemp = {
+        ...pedido,
+        fechaCobro
+      }
+      delete pedidoTemp.id;
+      return pedidoTemp;
+    })
+
+    return this.http.post(`${this.DB_URL}${this.DB_NODE}/mesas/${mesaId}/pedidosCobrados.json`, pedidosTemp)
+
   }
 
 }
