@@ -31,11 +31,16 @@ export class NuevaMesaComponent implements OnInit {
     pedidosCobrados: []
   };
 
-  constructor(private restoService : RestoService, private rl : ActivatedRoute, private mesasService : MesasService, private route: Router) {}
+  constructor(
+    private restoService : RestoService, 
+    private rl : ActivatedRoute, 
+    private mesasService : MesasService, 
+    private route: Router
+  ){}
   
   ngOnInit(): void {
     this.restoService.obtenerRestaurant().subscribe(resp => {
-      this.datos_restaurante = resp;
+      this.datos_restaurante = resp;      
     })
 
     this.mesaId = this.rl.snapshot.paramMap.get('id')

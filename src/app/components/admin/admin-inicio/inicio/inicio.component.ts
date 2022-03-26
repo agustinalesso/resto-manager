@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { RestoData } from 'src/app/models/restaurant.model';
 import { RestoService } from 'src/app/services/resto.service';
@@ -11,15 +12,13 @@ import { RestoService } from 'src/app/services/resto.service';
 export class InicioComponent implements OnInit {
 
   uid_hash: string | null = null;
-  datos_restaurante : RestoData = new RestoData();
+  datos_restaurante? : Observable<RestoData>;
 
   constructor(private restoService : RestoService) { }
 
   ngOnInit(): void {
     
-    this.restoService.obtenerRestaurant().subscribe(resp => {
-      this.datos_restaurante = resp;
-    })
+    this.datos_restaurante = this.restoService.obtenerRestaurant();
 
   }
 
